@@ -204,12 +204,42 @@ public OnPlayerCommandText(playerid, cmdtext[])
     if (!g_Authed[playerid]) return 1;
     if (!strcmp(cmdtext, "/help", true))
     {
-        SendClientMessage(playerid, COLOR_WHITE, "/district /balance");
+        SendClientMessage(playerid, COLOR_WHITE, "/district /balance /rules /me /do /b");
         return 1;
     }
     if (!strcmp(cmdtext, "/district", true))
     {
         SendClientMessage(playerid, COLOR_ORANGE, "Omar District: near Ganton, Los Santos.");
+        return 1;
+    }
+    if (!strcmp(cmdtext, "/rules", true))
+    {
+        SendClientMessage(playerid, COLOR_WHITE, "Medium RP: No RDM, VDM, metagaming, powergaming or combat logging.");
+        SendClientMessage(playerid, COLOR_WHITE, "Respect safe zones and administrator instructions.");
+        return 1;
+    }
+    if (!strcmp(cmdtext, "/me", true, 3) && cmdtext[3] == ' ' && cmdtext[4] != '\\0')
+    {
+        new name[MAX_PLAYER_NAME + 1], message[144];
+        GetPlayerName(playerid, name, sizeof name);
+        format(message, sizeof message, "* %s %s", name, cmdtext[4]);
+        SendNearbyRPMessage(playerid, COLOR_ORANGE, message, 20.0);
+        return 1;
+    }
+    if (!strcmp(cmdtext, "/do", true, 3) && cmdtext[3] == ' ' && cmdtext[4] != '\\0')
+    {
+        new name[MAX_PLAYER_NAME + 1], message[144];
+        GetPlayerName(playerid, name, sizeof name);
+        format(message, sizeof message, "* %s (( %s ))", cmdtext[4], name);
+        SendNearbyRPMessage(playerid, COLOR_WHITE, message, 20.0);
+        return 1;
+    }
+    if (!strcmp(cmdtext, "/b", true, 2) && cmdtext[2] == ' ' && cmdtext[3] != '\\0')
+    {
+        new name[MAX_PLAYER_NAME + 1], message[144];
+        GetPlayerName(playerid, name, sizeof name);
+        format(message, sizeof message, "(( %s: %s ))", name, cmdtext[3]);
+        SendNearbyRPMessage(playerid, COLOR_WHITE, message, 20.0);
         return 1;
     }
     if (!strcmp(cmdtext, "/balance", true))
@@ -220,4 +250,19 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
     return 0;
+}
+
+stock SendNearbyRPMessage(playerid, color, const message[], Float:radius)
+{
+    new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+    for (new target = 0; target < MAX_PLAYERS; target++)
+    {
+        if (!IsPlayerConnected(target) || !g_Authed[target]) continue;
+        if (GetPlayerVirtualWorld(target) != GetPlayerVirtualWorld(playerid)) continue;
+        if (GetPlayerInterior(target) != GetPlayerInterior(playerid)) continue;
+        if (IsPlayerInRangeOfPoint(target, radius, x, y, z))
+            SendClientMessage(target, color, message);
+    }
+    return 1;
 }
