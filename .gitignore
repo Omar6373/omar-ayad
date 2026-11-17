@@ -1,0 +1,7 @@
+*.amx
+*.log
+.env
+server.cfg
+runtime/
+logs/
+cache/
