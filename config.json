@@ -1,0 +1,22 @@
+{
+  "name": "Omar RP | Medium RP",
+  "language": "Arabic",
+  "website": "",
+  "announce": false,
+  "enable_query": true,
+  "max_players": 100,
+  "network": {
+    "port": 7777
+  },
+  "pawn": {
+    "main_scripts": [
+      "omarrp 1"
+    ],
+    "side_scripts": [],
+    "legacy_plugins": []
+  },
+  "rcon": {
+    "enable": false,
+    "password": "CHANGE_ME_BEFORE_DEPLOYMENT"
+  }
+}
