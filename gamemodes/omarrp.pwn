@@ -218,7 +218,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
         SendClientMessage(playerid, COLOR_WHITE, "Respect safe zones and administrator instructions.");
         return 1;
     }
-    if (!strcmp(cmdtext, "/me", true, 3) && cmdtext[3] == ' ' && cmdtext[4] != '\\0')
+    if (!strcmp(cmdtext, "/me", true, 3) && cmdtext[3] == ' ' && cmdtext[4] != 0)
     {
         new name[MAX_PLAYER_NAME + 1], message[144];
         GetPlayerName(playerid, name, sizeof name);
@@ -226,7 +226,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
         SendNearbyRPMessage(playerid, COLOR_ORANGE, message, 20.0);
         return 1;
     }
-    if (!strcmp(cmdtext, "/do", true, 3) && cmdtext[3] == ' ' && cmdtext[4] != '\\0')
+    if (!strcmp(cmdtext, "/do", true, 3) && cmdtext[3] == ' ' && cmdtext[4] != 0)
     {
         new name[MAX_PLAYER_NAME + 1], message[144];
         GetPlayerName(playerid, name, sizeof name);
@@ -234,7 +234,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
         SendNearbyRPMessage(playerid, COLOR_WHITE, message, 20.0);
         return 1;
     }
-    if (!strcmp(cmdtext, "/b", true, 2) && cmdtext[2] == ' ' && cmdtext[3] != '\\0')
+    if (!strcmp(cmdtext, "/b", true, 2) && cmdtext[2] == ' ' && cmdtext[3] != 0)
     {
         new name[MAX_PLAYER_NAME + 1], message[144];
         GetPlayerName(playerid, name, sizeof name);
