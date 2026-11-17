@@ -20,3 +20,8 @@ Install the open.mp server and a matching Pawn compiler and open.mp includes on 
 5. Load-test with increasing player counts before advertising 100 CCU.
 
 This is a development starter, not a production-ready roleplay server.
+
+## Database foundation (added)
+- `database/schema.sql`: MariaDB account, ledger, payroll progress, family and admin audit tables.
+- `docs/ACCOUNTS_IMPLEMENTATION.md`: authentication, atomic economy operations and test requirements.
+- **Not yet wired to Pawn**: current spawn code resets cash to $2,000 on every respawn. Do not deploy this prototype publicly.
